@@ -4,7 +4,7 @@
 ###############################################################################
 # aliases
 alias cls='clear && ls'
-alias vime='vim +Explore'
+alias vime='vim +NERDTree'
 alias tat='tmux attach -t'
 alias gs='git status'
 alias gd='git diff'

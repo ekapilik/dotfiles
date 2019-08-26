@@ -23,8 +23,12 @@
 
 ### .vimrc
 
-* installs plug-in manager (vim-plug)
-* installs rust-lang/rust.vim plugin
+* installs plug-in manager (Vundle)
+* Plugin 'itchyny/lightline.vim'
+* Plugin 'joshdick/onedark.vim'
+* Plugin 'scrooloose/nerdtree'
+* F6 toggles NERDTree
+* F4 focuses to NERDTree
 * turn on syntax highlighting
 * preserve transparent background
 * search settings

@@ -5,28 +5,33 @@
 " Eric Kapilik .vimrc
 " Last updated 08/25/2019
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set nocompatible				" Don't worry about vi compatibility
 
 " automatically install the plugin manager if it's not there
-if empty(glob('~/.vim/autoload/plug.vim'))
-    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
+set rtp+=~/.vim/bundle/Vundle.vim
+filetype off                    " required for Vundle (?)
+call vundle#begin()
 
-" declare plugins, install with :PlugInstall if necessary
-call plug#begin('~/.vim/plugged')
-Plug 'rust-lang/rust.vim'
-call plug#end()
+" let Vundle manage Vundle, required
 
-set nocompatible				" Don't worry about vi compatibility
-filetype plugin indent on		" Required for Vundle (?)
-set autoread					" Detect when a file is changed
-set colorcolumn=80				" 80 character limit reminder
-colorscheme torte				" Chosen color scheme
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'itchyny/lightline.vim'
+Plugin 'joshdick/onedark.vim'
+Plugin 'scrooloose/nerdtree'
+
+" All of your plugins must be added before the following line.
+call vundle#end() " required
+filetype plugin indent on " required
 
 " Turn on syntax highlighting
 syntax on
 set showmode
+
+" Turn onedark.vim theme on
+colorscheme onedark
+
+set autoread					" Detect when a file is changed
+set colorcolumn=80				" 80 character limit reminder
 
 " Preserve transparent background
 hi Normal guibg=NONE ctermbg=NONE
@@ -80,7 +85,7 @@ function SetKernelRules()
 endfunction
 
 " Set number lines on
-set nu 
+set number
 
 " Status Line
 set laststatus=2                               " always show status line
@@ -121,6 +126,18 @@ function! WinMove(key)
     endif
 endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Plugin settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" close NERDTree after a file is opened
+let g:NERDTreeQuitOnOpen=0
+" show hidden files in NERDTree
+let NERDTreeShowHidden=1
+" Toggle NERDTree
+nmap <F6> :NERDTreeToggle<cr>
+" Focus to NERDTree
+nmap <F4> :NERDTreeFind<cr>
 
 set fdm=syntax
 set foldlevelstart=20
