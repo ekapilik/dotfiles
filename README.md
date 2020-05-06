@@ -1,6 +1,10 @@
 # dotfiles
 .config files for personalized linux usage
 
+## Installation
+* Make scripts executable: [$ sudo chmod +x *.sh]
+* Install VIM plugins: [$ sudo vim +PluginInstall]
+
 ## Configuration Files
 
 ### .bashrc

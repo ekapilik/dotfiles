@@ -3,21 +3,20 @@
 " Cheat sheet ^^^^^
 "
 " Eric Kapilik .vimrc
-" Last updated 08/25/2019
+" Last updated 05/06/2020
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible				" Don't worry about vi compatibility
+filetype off                    " required for Vundle (?)
 
 " automatically install the plugin manager if it's not there
 set rtp+=~/.vim/bundle/Vundle.vim
-filetype off                    " required for Vundle (?)
 call vundle#begin()
 
 " let Vundle manage Vundle, required
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'itchyny/lightline.vim'
-Plugin 'joshdick/onedark.vim'
-Plugin 'scrooloose/nerdtree'
+Plugin 'preservim/nerdtree'
 
 " All of your plugins must be added before the following line.
 call vundle#end() " required
@@ -26,9 +25,6 @@ filetype plugin indent on " required
 " Turn on syntax highlighting
 syntax on
 set showmode
-
-" Turn onedark.vim theme on
-colorscheme onedark
 
 set autoread					" Detect when a file is changed
 set colorcolumn=80				" 80 character limit reminder
