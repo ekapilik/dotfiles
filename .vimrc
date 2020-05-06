@@ -130,6 +130,8 @@ endfunction
 let g:NERDTreeQuitOnOpen=0
 " show hidden files in NERDTree
 let NERDTreeShowHidden=1
+" start NERDTree automatically
+au VimEnter * NERDTree
 " Toggle NERDTree
 nmap <F6> :NERDTreeToggle<cr>
 " Focus to NERDTree
@@ -138,3 +140,4 @@ nmap <F4> :NERDTreeFind<cr>
 set fdm=syntax
 set foldlevelstart=20
 set noeb vb t_tb=
+
