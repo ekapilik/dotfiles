@@ -2,7 +2,7 @@
 .config files for personalized linux usage
 
 ## Installation
-* Make scripts executable: [$ sudo chmod +x *.sh]
+* Set Up Vundle [`git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim`](https://github.com/VundleVim/Vundle.vim)
 * Install VIM plugins: [$ sudo vim +PluginInstall]
 
 ## Configuration Files
