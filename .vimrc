@@ -137,6 +137,11 @@ nmap <F6> :NERDTreeToggle<cr>
 " Focus to NERDTree
 nmap <F4> :NERDTreeFind<cr>
 
+" Tab cycle
+map <C-l> :tabn<CR>
+map <C-h> :tabp<CR>
+map <C-n> :tabnew<CR>
+
 set fdm=syntax
 set foldlevelstart=20
 set noeb vb t_tb=
