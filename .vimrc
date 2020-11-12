@@ -17,6 +17,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'itchyny/lightline.vim'
 Plugin 'preservim/nerdtree'
+Plugin 'rhysd/vim-clang-format'
 
 " All of your plugins must be added before the following line.
 call vundle#end() " required
@@ -146,3 +147,11 @@ set fdm=syntax
 set foldlevelstart=20
 set noeb vb t_tb=
 
+" Clang-format
+let g:clang_format#style_options = {
+            \ "AccessModifierOffset" : -4,
+            \ "AllowShortIfStatementsOnASingleLine" : "true",
+            \ "AlwaysBreakTemplateDeclarations" : "true",
+            \ "Standard" : "C++11"}
+
+map <C-f> :ClangFormat<CR>
