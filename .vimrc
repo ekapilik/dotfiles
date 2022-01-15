@@ -1,148 +1,92 @@
-" http://tnerual.eriogerg.free.fr/vimqrc.html
-"
-" Cheat sheet ^^^^^
-"
-" Eric Kapilik .vimrc
-" Last updated 05/06/2020
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set nocompatible				" Don't worry about vi compatibility
-filetype off                    " required for Vundle (?)
+set nocompatible              " be iMproved, required
+filetype off                  " required
 
-" automatically install the plugin manager if it's not there
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" set the runtime path to include Vundle and initialize
+ set rtp+=~/.vim/bundle/Vundle.vim
 
-" let Vundle manage Vundle, required
+" " ================ Plugins ================
+ call vundle#begin()
+ " Plugin manager
+ Plugin 'VundleVim/Vundle.vim'
 
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'itchyny/lightline.vim'
-Plugin 'preservim/nerdtree'
+ " NERDTree
+ Plugin 'preservim/nerdtree'
+ Plugin 'scrooloose/nerdtree-project-plugin'
+ Plugin 'sheerun/vim-polyglot'
+ Plugin 'Xuyuanp/nerdtree-git-plugin'
+ Plugin 'itchyny/lightline.vim'
 
-" All of your plugins must be added before the following line.
-call vundle#end() " required
-filetype plugin indent on " required
+ " Git Gutter
+ Plugin 'airblade/vim-gitgutter'
 
-" Turn on syntax highlighting
-syntax on
-set showmode
+ " a.vim (switch between .cpp and hpp)
+ Plugin 'ericcurtin/CurtineIncSw.vim'
+ call vundle#end()            " required
 
-set autoread					" Detect when a file is changed
-set colorcolumn=80				" 80 character limit reminder
+ " =========================================
 
-" Preserve transparent background
-hi Normal guibg=NONE ctermbg=NONE
+ " ================ Shortcuts ================
+ " NERDTree
+ nnoremap <leader>n :NERDTreeFocus<CR>
+ nnoremap <C-n> :NERDTree<CR>
+ nnoremap <C-t> :NERDTreeToggle<CR>
+ nnoremap <C-f> :NERDTreeFind<CR>
+ autocmd VimEnter * NERDTree
 
-set number relativenumber		" Show line numbers
-set encoding=utf-8				" Encoding
+ " Git Gutter
+ nnoremap <C-l> :GitGutterLineHighlightsToggle<CR>
 
-" Searching
-set ignorecase
-set smartcase
-set showmatch
-set hlsearch
-set incsearch
+ " CurtineIncSw
+ map <F5> :call CurtineIncSw()<CR>
+ " ===========================================
 
-" Line wrapping
-set wrap
-set linebreak
 
-" Visualize tabs and newlines
-set listchars=tab:▸\ ,eol:¬
-map <leader>l :set list!<CR>
+ " Indentation
+ filetype plugin indent on    " required
+ set expandtab
+ set tabstop=2
+ set softtabstop=2
+ set shiftwidth=2
 
-" Show trailing whitespace and spaces for tabs
-map <leader>L /\s\+$<CR>
+ " FINDING FILES:
+ " Search down into subfolders
+ " Provides tab-completion for all file related tasks
+ set path+=**
+ set wildmenu
+ " - Hit tab to :find by partial match
+ " - Use * to make it fuzzy
+ " - :b lets you autocomplete any open buffer
 
-" Navigating Tabs
-" New WinMove function may replace these
-map <leader>p :tabp<CR>
-map <leader>n :tabn<CR>
-map <leader>t :tab split +Explore<CR>
-map <leader>T :Explore<CR>
+ " TAG JUMPING:
+ " Create the `tags` file (may need to install ctags first)
+ command! MakeTags !ctags -R .
+ " - Use ^] to jump to tag under cursor
+ " - Use g^] for ambiguous tags
+ " - Use ^t to jump back up the tag stack
 
-" Tab Character Spacing
-set tabstop=4
-set shiftwidth=4
-set expandtab
+ " AUTOCOMPLETE:
+ " - ^x^n for JUST this file
+ " - ^x^f for filenames (works with our path trick!)
+ " - ^x^] for tags only
+ " - ^n for anything specified by the 'complete' option
+ " - use ^n and ^p to go back and forth in completion list
 
-" Quick Insertion
-nnoremap <Space> i_<Esc>r
+ " FILE BROSWING:
+ " Tweaks for browsing
+ let g:netrw_banner=0        " disable annoying banner
+ let g:netrw_browse_split=4  " open in prior window
+ let g:netrw_altv=1          " open splits to the right
+ let g:netrw_liststyle=3     " tree view
+ let g:netrw_list_hide=netrw_gitignore#Hide()
+ let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
+ " - :edit a folder to open a file browser
+ " - <CR>/v/t to open in an h-split/v-split/tab
+ " - check |netrw-browse-maps| for more mappings
 
-" HTML autocomplete
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+ " Switch between Vim window splits easily
+ nmap <silent> <A-Up> :wincmd k<CR>
+ nmap <silent> <A-Down> :wincmd j<CR>
+ nmap <silent> <A-Left> :wincmd h<CR>
+ nmap <silent> <A-Right> :wincmd l<CR>
 
-" Kernel-style C
-autocmd FileType c call SetKernelRules()
-function SetKernelRules()
-    set tabstop=8
-    set softtabstop=8
-    set shiftwidth=8
-    set noexpandtab
-endfunction
-
-" Set number lines on
-set number
-
-" Status Line
-set laststatus=2                               " always show status line
-set statusline=%<%f\                           " Filename
-set statusline+=%w%h%m%r                       " Options
-set statusline+=\ [%{&ff}/%Y]                  " filetype
-set statusline+=\ [%{split(getcwd(),'/')[-1]}] " current dir
-set statusline+=%=%-14.(%l,%c%V%)\ %p%%        " Right aligned file nav info
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Windows / GVim
-" set expandtab
-" filetype plugin indent on
-" set backspace=indent,eol,start
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                Functions                                    "
-"                                                                             "
-" WinMove from https://github.com/nicknisi/vim-workshop/                      "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <C-h> :call WinMove('h')<cr>
-map <C-j> :call WinMove('j')<cr>
-map <C-k> :call WinMove('k')<cr>
-map <C-l> :call WinMove('l')<cr>
-
-" Window movement shortcuts
-" move to the window in the direction shown, or create a new window
-function! WinMove(key)
-    let t:curwin = winnr()
-    exec "wincmd ".a:key
-    if (t:curwin == winnr())
-        if (match(a:key,'[jk]'))
-            wincmd v
-        else
-            wincmd s
-        endif
-        exec "wincmd ".a:key
-    endif
-endfunction
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Plugin settings
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" close NERDTree after a file is opened
-let g:NERDTreeQuitOnOpen=0
-" show hidden files in NERDTree
-let NERDTreeShowHidden=1
-" start NERDTree automatically
-au VimEnter * NERDTree
-" Toggle NERDTree
-nmap <F6> :NERDTreeToggle<cr>
-" Focus to NERDTree
-nmap <F4> :NERDTreeFind<cr>
-
-" Tab cycle
-map <C-l> :tabn<CR>
-map <C-h> :tabp<CR>
-map <C-n> :tabnew<CR>
-
-set fdm=syntax
-set foldlevelstart=20
-set noeb vb t_tb=
-
+ set encoding=utf8
