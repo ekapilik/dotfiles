@@ -23,6 +23,7 @@ filetype off                  " required
  Plugin 'ericcurtin/CurtineIncSw.vim'
  call vundle#end()            " required
 
+ packadd termdebug
  " =========================================
 
  " ================ Shortcuts ================
@@ -31,14 +32,24 @@ filetype off                  " required
  nnoremap <C-n> :NERDTree<CR>
  nnoremap <C-t> :NERDTreeToggle<CR>
  nnoremap <C-f> :NERDTreeFind<CR>
- autocmd VimEnter * NERDTree
+ " autocmd VimEnter * NERDTree
 
  " Git Gutter
  nnoremap <C-l> :GitGutterLineHighlightsToggle<CR>
 
  " CurtineIncSw
  map <F5> :call CurtineIncSw()<CR>
+
  " ===========================================
+
+ " Display
+ syntax on
+ set showmode
+
+ set autoread
+ set colorcolumn=120
+
+ set number 
 
 
  " Indentation
@@ -90,3 +101,4 @@ filetype off                  " required
  nmap <silent> <A-Right> :wincmd l<CR>
 
  set encoding=utf8
+
