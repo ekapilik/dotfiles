@@ -40,6 +40,11 @@ filetype off                  " required
  " CurtineIncSw
  map <F5> :call CurtineIncSw()<CR>
 
+ " Terdebug
+ :nnoremap <Leader>d :Termdebug<Space>
+
+ " Refresh NerdTree
+ nmap <Leader>r :NERDTreeFocus<cr>R<c-w><c-p>
  " ===========================================
 
  " Display
