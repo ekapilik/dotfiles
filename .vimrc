@@ -15,6 +15,7 @@ filetype off                  " required
  Plugin 'sheerun/vim-polyglot'
  Plugin 'Xuyuanp/nerdtree-git-plugin'
  Plugin 'itchyny/lightline.vim'
+ Plugin 'vim-scripts/DoxygenToolkit.vim'
 
  " Git Gutter
  Plugin 'airblade/vim-gitgutter'
@@ -45,6 +46,9 @@ filetype off                  " required
 
  " Refresh NerdTree
  nmap <Leader>r :NERDTreeFocus<cr>R<c-w><c-p>
+
+ " Doxygen comment generation
+ nmap <Leader>c :Dox<CR>
  " ===========================================
 
  " Display
