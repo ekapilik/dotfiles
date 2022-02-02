@@ -1,28 +1,32 @@
 set nocompatible              " be iMproved, required
+
+set number
+
 filetype off                  " required
 
-" set the runtime path to include Vundle and initialize
- set rtp+=~/.vim/bundle/Vundle.vim
+if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
+  silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall -sync | source $MYVIMRC
+endif
 
 " " ================ Plugins ================
- call vundle#begin()
- " Plugin manager
- Plugin 'VundleVim/Vundle.vim'
+ call plug#begin('~/.local/share/nvim/plugged')
 
  " NERDTree
- Plugin 'preservim/nerdtree'
- Plugin 'scrooloose/nerdtree-project-plugin'
- Plugin 'sheerun/vim-polyglot'
- Plugin 'Xuyuanp/nerdtree-git-plugin'
- Plugin 'itchyny/lightline.vim'
- Plugin 'vim-scripts/DoxygenToolkit.vim'
+ Plug 'preservim/nerdtree'
+ Plug 'scrooloose/nerdtree-project-plugin'
+ Plug 'sheerun/vim-polyglot'
+ Plug 'Xuyuanp/nerdtree-git-plugin'
+ Plug 'itchyny/lightline.vim'
+ Plug 'vim-scripts/DoxygenToolkit.vim'
 
  " Git Gutter
- Plugin 'airblade/vim-gitgutter'
+ Plug'airblade/vim-gitgutter'
 
  " a.vim (switch between .cpp and hpp)
- Plugin 'ericcurtin/CurtineIncSw.vim'
- call vundle#end()            " required
+ Plug 'ericcurtin/CurtineIncSw.vim'
+ call plug#end()            " required
 
  packadd termdebug
  " =========================================
@@ -57,9 +61,6 @@ filetype off                  " required
 
  set autoread
  set colorcolumn=120
-
- set number 
-
 
  " Indentation
  filetype plugin indent on    " required
