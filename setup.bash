@@ -8,7 +8,7 @@ apt_updated=false;
 function __check_and_install__()
 {
     echo 'Checking for '$1
-    # use `apt list $1 | greo installed` instead?
+    # use `apt list $1 | grep installed` instead?
     which $1 2>&1 1> /dev/null
     if [ $? -ne 0 ]; then
         if [ ${2:-true} ]; then
@@ -53,3 +53,5 @@ done
 popd 2>&1 1> /dev/null
 unset $apt_updated
 
+# add scripts to ~
+source scripts/setup.bash
