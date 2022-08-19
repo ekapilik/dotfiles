@@ -2,6 +2,8 @@
 
 # Credit: https://gitlab.com/kunaltyagi/dotfiles/-/blob/master/setup.bash
 
+git submodule init && git submodule update
+
 apt_updated=false;
 
 # Don't send multiple arguments to this function
