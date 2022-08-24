@@ -83,7 +83,10 @@ endif
  command! MakeTags !ctags -R .
  " - Use ^] to jump to tag under cursor
  " - Use g^] for ambiguous tags
- " - Use ^t to jump back up the tag stack
+ " - Use ^[ to jump back up the tag stack
+ map <C-[> :pop<CR>
+ " - Use Alt + ] to open the definition in a vertical split
+ map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 
  " AUTOCOMPLETE:
  " - ^x^n for JUST this file
