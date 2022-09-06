@@ -10,7 +10,7 @@ if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall -sync | source $MYVIMRC
 endif
 
-" " ================ Plugins ================
+ " ================ Plugins ================
  call plug#begin('~/.local/share/nvim/plugged')
 
  " NERDTree
@@ -19,6 +19,7 @@ endif
  Plug 'sheerun/vim-polyglot'
  Plug 'Xuyuanp/nerdtree-git-plugin'
  Plug 'itchyny/lightline.vim'
+ Plug 'tpope/vim-fugitive'
  Plug 'vim-scripts/DoxygenToolkit.vim'
 
  " Git Gutter
@@ -30,6 +31,24 @@ endif
 
  packadd termdebug
  " =========================================
+ 
+ " =============== Configuration ============
+ let g:lightline = {
+       \ 'component_function': {
+       \   'filename': 'LightlineFilename',
+       \ }
+       \ }
+ 
+ function! LightlineFilename()
+   let root = fnamemodify(get(b:, 'git_dir'), ':h')
+   let path = expand('%:p')
+   if path[:len(root)-1] ==# root
+     return path[len(root)+1:]
+   endif
+   return expand('%')
+ endfunction
+ " ==========================================
+
 
  " ================ Shortcuts ================
  " NERDTree
