@@ -21,6 +21,8 @@ endif
  Plug 'itchyny/lightline.vim'
  Plug 'tpope/vim-fugitive'
  Plug 'vim-scripts/DoxygenToolkit.vim'
+ Plug 'junegunn/fzf.vim'
+ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
  " Git Gutter
  Plug'airblade/vim-gitgutter'
@@ -134,3 +136,9 @@ endif
 
  set encoding=utf8
 
+ " FZF
+ " https://dev.to/iggredible/how-to-search-faster-in-vim-with-fzf-vim-36ko
+ set grepprg=rg\ --vimgrep\ --smart-case\ --follow
+ nnoremap <silent> <C-f> :Files<CR>
+ nnoremap <silent> <leader>f :Rg<CR>
+ nnoremap <silent> <Leader>g :Commits<CR>
