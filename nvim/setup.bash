@@ -1,3 +1,4 @@
 #! /usr/bin/env bash
 
-__check_and_install__ nvim ${apt_updated:-false} python3-neovim ctags fzf ripgrep
+sudo apt update && sudo apt install -y python3-neovim ctags fzf ripgrep
+__check_and_install__ nvim ${apt_updated:-false} 
